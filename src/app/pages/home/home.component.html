@@ -1,0 +1,16 @@
+<ng-container *ngFor="let category of colorCategories">
+  <h1>{{category.name}}</h1>
+  <kor-grid fit-content>
+    <div
+      grid-cols="3"
+      class="color-property"
+      *ngFor="let property of category.properties"
+      [style.background-color]="'rgb(' + themeService.getPropertyValue(property) + ')'"
+    >
+      <div class="text">
+        <b>{{property}}</b>
+        {{themeService.getPropertyValue(property)}}
+      </div>
+    </div>
+  </kor-grid>
+</ng-container>
