@@ -5,6 +5,20 @@
   height="600px"
 ></iframe>
 
+<div class="buttons">
+  <kor-button
+    label="Randomize"
+    (click)="setRandomTheme()"
+  ></kor-button>
+  <!-- <kor-button
+    label="Copy"
+    color="secondary"
+  ></kor-button> -->
+  <kor-divider orientation="vertical"></kor-divider>
+</div>
+
+<kor-divider></kor-divider>
+
 <ng-container *ngFor="let category of colorCategories">
   <h2>{{category.name}}</h2>
   <kor-grid fit-content>

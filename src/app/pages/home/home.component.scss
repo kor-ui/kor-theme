@@ -2,13 +2,23 @@
   width: 880px;
   height: fit-content;
   margin: 40px auto;
+  display: flex;
+  flex-direction: column;
   iframe {
-    border: 8px solid rgba(var(--neutral-1), .6);
+    border: 12px solid rgb(var(--neutral-1));
     border-radius: 16px;
     opacity: 0;
     transition: .1s ease-in-out;
-    margin-top: 16px;
-    margin-bottom: 40px
+    box-sizing: border-box;
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+    > * + * {
+      margin-left: 8px;
+    }
   }
   h2 {
     margin: 40px 0 24px 0;

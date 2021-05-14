@@ -28,27 +28,6 @@
       logo="https://kor-ui.com/assets/favicon.png"
       label="MyApp"
     >
-      <kor-icon
-        slot="left"
-        button
-        icon="brightness_3"
-        onclick="document.documentElement.setAttribute('theme', 'dark')"
-      ></kor-icon>
-      <kor-icon
-        slot="right"
-        button
-        icon="brightness_7"
-        onclick="document.documentElement.setAttribute('theme', 'light')"
-      ></kor-icon>
-      <!-- avatar -->
-      <kor-avatar
-        slot="functions"
-        label="First Middle Last"
-        info="Information text"
-        image="https://i1.wp.com/www.docker.com/blog/wp-content/uploads/2019/10/Renee-M.jpg?fit=753%2C1024&ssl=1"
-      ></kor-avatar>
-    </kor-app-bar>
-    <kor-nav-bar slot="top">
       <kor-tabs>
         <kor-tab-item
           label="Active"
@@ -65,7 +44,14 @@
         button
         icon="save"
       ></kor-icon>
-    </kor-nav-bar>
+      <!-- avatar -->
+      <kor-avatar
+        slot="functions"
+        label="First Middle Last"
+        info="Information text"
+        image="https://i1.wp.com/www.docker.com/blog/wp-content/uploads/2019/10/Renee-M.jpg?fit=753%2C1024&ssl=1"
+      ></kor-avatar>
+    </kor-app-bar>
     <!-- panes -->
     <kor-pane
       slot="left"
@@ -1419,9 +1405,10 @@
         </kor-table-row>
       </kor-table>
       <kor-button
-        disabled
         slot="footer"
+        color="secondary"
       ></kor-button>
+      <kor-button slot="footer"></kor-button>
     </kor-card>
     <!-- notifications -->
     <kor-notifications position="top-left">
