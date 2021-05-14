@@ -8,13 +8,14 @@ export class ThemeService {
   constructor() { }
 
   setPropertyValue(name: string, val: string): void {
-    const doc = document.documentElement;
-    doc.style.setProperty(name, val);
+    const el: any = document.querySelector('iframe')?.contentWindow?.document.documentElement;
+    console.log(el);
+    el?.style.setProperty(name, val);
   }
 
   getPropertyValue(name: string): string {
-    const doc = document.documentElement;
-    return getComputedStyle(doc).getPropertyValue(name);
+    const el: any = document.querySelector('iframe')?.contentWindow?.document.documentElement;
+    return el ? getComputedStyle(el).getPropertyValue(name) : '';
   }
 
   getRandomRgb(min: number = 0, max: number = 255): number {

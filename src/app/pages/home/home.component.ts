@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
@@ -6,7 +6,8 @@ import { ThemeService } from 'src/app/services/theme.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements AfterViewInit {
+  @ViewChild('iframe') iframe: ElementRef | undefined;
   colorCategories = [
     {
       name: 'Base',
@@ -28,10 +29,18 @@ export class HomeComponent implements OnInit {
 
   constructor(public themeService: ThemeService) { }
 
-  ngOnInit(): void {
-    this.themeService.setPropertyValue('--accent-1', `${this.themeService.getRandomRgbString(0, 200)}`);
+  ngAfterViewInit(): void {
+    // after iframe loads, set random properties
+    const iframe = this.iframe?.nativeElement;
+    iframe?.addEventListener('load', () => {
+      iframe.style.opacity = 1;
+      iframe.style.marginTop = 0;
+      this.createRandomTheme();
+    });
   }
 
-
+  private createRandomTheme(): void {
+    this.themeService.setPropertyValue('--accent-1', `${this.themeService.getRandomRgbString(0, 200)}`);
+  }
 
 }

@@ -1,6 +1,18 @@
 :host {
-  width: 800px;
-  margin: 0 auto;
+  width: 880px;
+  height: fit-content;
+  margin: 40px auto;
+  iframe {
+    border: 8px solid rgba(var(--neutral-1), .6);
+    border-radius: 16px;
+    opacity: 0;
+    transition: .1s ease-in-out;
+    margin-top: 16px;
+    margin-bottom: 40px
+  }
+  h2 {
+    margin: 40px 0 24px 0;
+  }
   .color-property {
     position: relative;
     padding-top: 100%;
@@ -16,7 +28,7 @@
       bottom: 0;
       width: 100%;
       color: white;
-      background-color: rgba(0,0,0,.2);
+      background-color: rgba(0,0,0,.4);
     }
   }
 }
