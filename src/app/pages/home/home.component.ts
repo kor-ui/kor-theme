@@ -43,7 +43,11 @@ export class HomeComponent implements AfterViewInit {
 
   setRandomTheme(): void {
     const themes = ['dark', 'light'];
-    this.themeService.getRandomNumber(0, 1).then(val => this.setTheme(themes[val]));
+    const fonts = ['Monda', 'IBM Plex Mono', 'Roboto Slab', 'Open Sans'];
+    this.themeService.getRandomNumber(0, themes.length - 1).then(val => this.setTheme(themes[val]));
+    this.themeService.getRandomNumber(0, fonts.length - 1).then((val) => {
+      this.themeService.importFont(fonts[val]);
+    });
   }
 
   private setTheme(theme: string): void {
@@ -57,9 +61,9 @@ export class HomeComponent implements AfterViewInit {
 
   private async setAccentColors(): Promise<null> {
     let r: number = 0, g: number = 0, b: number = 0;
-    await this.themeService.getRandomNumber().then((val) => r = val);
-    await this.themeService.getRandomNumber().then((val) => g = val);
-    await this.themeService.getRandomNumber().then((val) => b = val);
+    await this.themeService.getRandomNumber(10, 245).then((val) => r = val);
+    await this.themeService.getRandomNumber(10, 245).then((val) => g = val);
+    await this.themeService.getRandomNumber(10, 245).then((val) => b = val);
     this.themeService.setPropertyValue('--accent-1', `${r}, ${g}, ${b}`);
     this.themeService.setPropertyValue('--accent-1b', `${r + 10}, ${g + 10}, ${b + 10}`);
     this.themeService.setPropertyValue('--accent-1c', `${r - 10}, ${g - 10}, ${b - 10}`);
