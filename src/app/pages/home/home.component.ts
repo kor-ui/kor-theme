@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { ColorService } from 'src/app/services/color.service';
 import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
@@ -27,7 +28,7 @@ export class HomeComponent implements AfterViewInit {
     }
   ];
 
-  constructor(public themeService: ThemeService) { }
+  constructor(public themeService: ThemeService, public colorService: ColorService) { }
 
   ngAfterViewInit(): void {
     // after iframe loads, set random properties
@@ -80,15 +81,15 @@ export class HomeComponent implements AfterViewInit {
 
   private setShadow(): void {
     // --shadow-1: 0 2px 8px rgba(0,0,0,.1), 0 1px 4px rgba(0,0,0,.05);
-    this.themeService.getRandomNumber(0, 4).then(async (blur) => {
+    this.themeService.getRandomNumber(0, 4).then(async (b) => {
       let x: number = 0, y: number = 0, s: number = 0;
       await this.themeService.getRandomNumber(-2, 2).then((val) => x = val);
       await this.themeService.getRandomNumber(-2, 2).then((val) => y = val);
       await this.themeService.getRandomNumber(0, 2).then((val) => s = val);
-      const color = (blur < 3 && (x > -2 && x < 2) && (y > -2 && y < 2))
+      const color = (b < 3 && x === y)
         ? `rgba(${this.themeService.getPropertyValue('--neutral-1')}, .2)`
         : 'rgba(0, 0, 0, .2)';
-      this.themeService.setPropertyValue('--shadow-1', `${x}px ${y}px ${blur}px ${s}px ${color}`);
+      this.themeService.setPropertyValue('--shadow-1', `${x}px ${y}px ${b}px ${s}px ${color}`);
     });
   }
 
@@ -113,5 +114,12 @@ export class HomeComponent implements AfterViewInit {
       this.themeService.setPropertyValue('--base-4', `${r + step * 4}, ${g + step * 4}, ${b + step * 4}`);
     });
   }
+
+  pickColor(property: string, tar: any): void {
+    const rgb = this.colorService.hexToRgb(tar.value);
+    if (rgb) {
+      this.themeService.setPropertyValue(property, rgb);
+    }
+  };
 
 }

@@ -21,14 +21,26 @@
 
 <ng-container *ngFor="let category of colorCategories">
   <h2>{{category.name}}</h2>
-  <kor-grid fit-content>
+  <kor-grid
+    fit-content
+    spacing="l"
+  >
     <div
-      grid-cols="2"
+      grid-cols="3"
       grid-cols-s="4"
       class="color-property"
       *ngFor="let property of category.properties"
-      [style.background-color]="'rgb(' + themeService.getPropertyValue(property) + ')'"
     >
+      <div
+        class="swatch"
+        [style.background-color]="'rgb(' + themeService.getPropertyValue(property) + ')'"
+      >
+        <input
+          type="color"
+          [value]="themeService.getPropertyValue(property) ? colorService.rgbToHex(themeService.getPropertyValue(property)) : ''"
+          (change)="pickColor(property, $event.target)"
+        />
+      </div>
       <div class="text">
         <b>{{property}}</b>
         {{themeService.getPropertyValue(property)}}
