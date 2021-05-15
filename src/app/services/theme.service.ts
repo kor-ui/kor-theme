@@ -21,4 +21,9 @@ export class ThemeService {
     return new Promise((resolve) => resolve(min + Math.floor(Math.random() * (max - min + 1))));
   }
 
+  copyCSS(): void {
+    const el: any = document.querySelector('iframe')?.contentWindow?.document.body;
+    navigator.clipboard.writeText(el?.getAttribute('style'));
+  }
+
 }

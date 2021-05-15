@@ -13,7 +13,7 @@ export class ColorService {
   }
 
   rgbToHex(rgb: string): string {
-    const rgbArray = rgb.split(', ');
+    const rgbArray = rgb.replace(' ', '').split(',');
     const [r, g, b] = [
       parseInt(rgbArray[0]),
       parseInt(rgbArray[1]),

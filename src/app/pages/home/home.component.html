@@ -10,10 +10,11 @@
     label="Randomize"
     (click)="setRandomTheme()"
   ></kor-button>
-  <!-- <kor-button
-    label="Copy"
+  <kor-button
+    label="Copy CSS"
     color="secondary"
-  ></kor-button> -->
+    (click)="themeService.copyCSS()"
+  ></kor-button>
   <kor-divider orientation="vertical"></kor-divider>
 </div>
 
@@ -26,7 +27,7 @@
     spacing="l"
   >
     <div
-      grid-cols="3"
+      grid-cols="2"
       grid-cols-s="4"
       class="color-property"
       *ngFor="let property of category.properties"

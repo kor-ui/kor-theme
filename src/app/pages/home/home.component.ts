@@ -101,8 +101,8 @@ export class HomeComponent implements AfterViewInit {
 
   private setBaseColors(theme: string): void {
     this.themeService.getRandomNumber(0, 40).then(async (step) => {
-      const min = theme === 'dark' ? 0 : 245 - step * 3;
-      const max = theme === 'dark' ? 20 : 255 - step * 3;
+      const min = theme === 'dark' ? 0 : 245 - step * 4;
+      const max = theme === 'dark' ? 20 : 255 - step * 4;
       let r: number = 0, g: number = 0, b: number = 0;
       await this.themeService.getRandomNumber(min, max).then((val) => r = val);
       await this.themeService.getRandomNumber(min, max).then((val) => g = val);
