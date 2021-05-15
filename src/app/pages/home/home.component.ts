@@ -35,6 +35,7 @@ export class HomeComponent implements AfterViewInit {
     const iframe = this.iframe?.nativeElement;
     iframe?.addEventListener('load', () => {
       iframe.style.opacity = 1;
+      iframe.contentWindow.document.querySelector('kor-page').style.zoom = '0.75';
       // set initial theme
       this.setRandomTheme();
     });
