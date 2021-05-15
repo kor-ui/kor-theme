@@ -82,13 +82,14 @@ export class HomeComponent implements AfterViewInit {
   private setShadow(): void {
     // --shadow-1: 0 2px 8px rgba(0,0,0,.1), 0 1px 4px rgba(0,0,0,.05);
     this.themeService.getRandomNumber(0, 4).then(async (b) => {
-      let x: number = 0, y: number = 0, s: number = 0;
+      let x: number = 0, y: number = 0, s: number = 0, a: number = 0;
       await this.themeService.getRandomNumber(-2, 2).then((val) => x = val);
       await this.themeService.getRandomNumber(-2, 2).then((val) => y = val);
       await this.themeService.getRandomNumber(0, 2).then((val) => s = val);
+      await this.themeService.getRandomNumber(0, 2).then((val) => a = val);
       const color = (b < 3 && x === y)
-        ? `rgba(${this.themeService.getPropertyValue('--neutral-1')}, .2)`
-        : 'rgba(0, 0, 0, .2)';
+        ? `rgba(${this.themeService.getPropertyValue('--neutral-1')}, 0.${a})`
+        : `rgba(0, 0, 0, 0.${a})`;
       this.themeService.setPropertyValue('--shadow-1', `${x}px ${y}px ${b}px ${s}px ${color}`);
     });
   }
