@@ -16,7 +16,7 @@ export class HomeComponent implements AfterViewInit {
     },
     {
       name: 'Accent',
-      properties: ['--accent-1', '--accent-1b', '--accent-1c']
+      properties: ['--accent-1', '--accent-1b']
     },
     {
       name: 'Neutral',
@@ -61,12 +61,11 @@ export class HomeComponent implements AfterViewInit {
 
   private async setAccentColors(): Promise<null> {
     let r: number = 0, g: number = 0, b: number = 0;
-    await this.themeService.getRandomNumber(10, 245).then((val) => r = val);
-    await this.themeService.getRandomNumber(10, 245).then((val) => g = val);
-    await this.themeService.getRandomNumber(10, 245).then((val) => b = val);
+    await this.themeService.getRandomNumber(0, 245).then((val) => r = val);
+    await this.themeService.getRandomNumber(0, 245).then((val) => g = val);
+    await this.themeService.getRandomNumber(0, 245).then((val) => b = val);
     this.themeService.setPropertyValue('--accent-1', `${r}, ${g}, ${b}`);
     this.themeService.setPropertyValue('--accent-1b', `${r + 10}, ${g + 10}, ${b + 10}`);
-    this.themeService.setPropertyValue('--accent-1c', `${r - 10}, ${g - 10}, ${b - 10}`);
     return new Promise(async (resolve) => resolve(null));
   }
 
