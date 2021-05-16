@@ -29,7 +29,7 @@ export class ThemeService {
 ${this.getIframeFontImport()?.outerHTML}
 <!-- set the theme styles -->
 <style>
-  html, body {
+  html, body, kor-page {
     ${formattedStyle}
   }
 </style>`);
