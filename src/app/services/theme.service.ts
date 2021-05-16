@@ -23,19 +23,32 @@ export class ThemeService {
 
   copyCSS(): void {
     const body: any = this.getIframeBody();
-    navigator.clipboard.writeText(body?.getAttribute('style'));
+    const formattedStyle = body?.getAttribute('style')?.replaceAll('; ', `;\n    `);
+    navigator.clipboard.writeText(`
+<!-- import the theme font -->
+${this.getIframeFontImport()?.outerHTML}
+<!-- set the theme styles -->
+<style>
+  html, body {
+    ${formattedStyle}
+  }
+</style>`);
   }
 
-  getIframeBody(): HTMLElement | undefined {
+  private getIframeBody(): HTMLElement | undefined {
     return document.querySelector('iframe')?.contentWindow?.document.body;
+  }
+
+  private getIframeFontImport(): HTMLLinkElement | undefined {
+    const head: any = document.querySelector('iframe')?.contentWindow?.document.head;
+    return head.querySelector("link[href*='fonts.googleapis.com']");
   }
 
   importFont(font: string): void {
     const head: any = document.querySelector('iframe')?.contentWindow?.document.head;
-    const style: HTMLStyleElement | undefined = head.querySelector("link[href*='fonts.googleapis.com']");
-    style?.remove();
+    this.getIframeFontImport()?.remove();
     head.insertAdjacentHTML('beforeend', `<link href="https://fonts.googleapis.com/css2?family=${font.replace(' ', '+')}&display=swap" rel="stylesheet">`);
-    this.setPropertyValue('--header-1', `bold 16px/24px ${font}`);
+    this.setPropertyValue('--header-1', `bold 16px/24px '${font}'`);
   }
 
 }
